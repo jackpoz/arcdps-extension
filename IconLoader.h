@@ -2,9 +2,17 @@
 
 #include "Singleton.h"
 
+#if __has_include("atlbase.h")
 #include <atlbase.h>
+#else
+#include "WindowsSpecificTypes.h"
+#endif
 #include <condition_variable>
+#if __has_include("d3d11.h")
 #include <d3d11.h>
+#else
+#include "WindowsSpecificTypes.h"
+#endif
 #include <filesystem>
 #include <map>
 #include <queue>
@@ -12,8 +20,16 @@
 #include <thread>
 #include <utility>
 #include <variant>
+#if __has_include("wincodec.h")
 #include <wincodec.h>
+#else
+#include "WindowsSpecificTypes.h"
+#endif
+#if __has_include("Windows.h")
 #include <Windows.h>
+#else
+#include "WindowsSpecificTypes.h"
+#endif
 
 namespace ArcdpsExtension {
 	template<typename From, typename To>

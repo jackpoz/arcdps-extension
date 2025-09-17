@@ -2,7 +2,11 @@
 #include "arcdps_structs_slim.h"
 
 #include <string>
+#if __has_include("Windows.h")
 #include <Windows.h>
+#else
+#include "WindowsSpecificTypes.h"
+#endif
 
 bool is_player(const ag* new_player);
 

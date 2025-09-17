@@ -4,7 +4,11 @@
 
 #include <ArcdpsUnofficialExtras/KeyBindHelper.h>
 #include <functional>
+#if __has_include("Windows.h")
 #include <Windows.h>
+#else
+#include "WindowsSpecificTypes.h"
+#endif
 
 namespace ArcdpsExtension {
 	/**
