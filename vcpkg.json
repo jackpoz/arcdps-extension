@@ -22,7 +22,6 @@
       "unofficial-extras": {
         "description": "make tools available, that depend on arcdps-unofficial-extras",
         "dependencies": [
-          "crossplatformmocks",
           "arcdps-unofficial-extras"
         ]
       },
