@@ -2,7 +2,7 @@
 #include "arcdps_structs_slim.h"
 
 #include <string>
-#include <Windows.h>
+#include <CrossplatformMocks/Module.h>
 
 bool is_player(const ag* new_player);
 

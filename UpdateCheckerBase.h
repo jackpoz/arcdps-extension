@@ -8,7 +8,7 @@
 #include <string>
 #include <thread>
 #include <vector>
-#include <Windows.h>
+#include <CrossplatformMocks/Module.h>
 
 namespace ArcdpsExtension {
 	// Expected usage is as follows:

@@ -13,7 +13,7 @@
 #include <utility>
 #include <variant>
 #include <wincodec.h>
-#include <Windows.h>
+#include <CrossplatformMocks/Module.h>
 
 namespace ArcdpsExtension {
 	template<typename From, typename To>
