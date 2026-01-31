@@ -5,7 +5,8 @@
   "dependencies": [
     "magic-enum",
     "nlohmann-json",
-    "gtest"
+    "gtest",
+    "crossplatformmocks"
   ],
   "default-features": [
     "imgui",
