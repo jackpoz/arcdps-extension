@@ -4,7 +4,7 @@
 
 #include <ArcdpsUnofficialExtras/KeyBindHelper.h>
 #include <functional>
-#include <Windows.h>
+#include <CrossplatformMocks/Module.h>
 
 namespace ArcdpsExtension {
 	/**

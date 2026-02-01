@@ -20,6 +20,7 @@ namespace {
 	 * CurrentGUID -> WantedGUID
 	 */
 	const std::vector<std::pair<GUID, GUID>> WIC_CONVERT = {
+#ifdef _WIN32
   // Note target GUID in this conversion table must be one of those directly supported formats (above).
 			{GUID_WICPixelFormatBlackWhite,           GUID_WICPixelFormat8bppGray        }, // DXGI_FORMAT_R8_UNORM
 
@@ -83,7 +84,7 @@ namespace {
 			{GUID_WICPixelFormat64bppRGB,             GUID_WICPixelFormat64bppRGBA       }, // DXGI_FORMAT_R16G16B16A16_UNORM
 			{GUID_WICPixelFormat64bppPRGBAHalf,       GUID_WICPixelFormat64bppRGBAHalf   }, // DXGI_FORMAT_R16G16B16A16_FLOAT
 #endif
-
+#endif
   // We don't support n-channel formats
 	};
 } // namespace
@@ -162,6 +163,7 @@ void ArcdpsExtension::IconLoader::QueueIcon::LoadFile(const std::filesystem::pat
 		return;
 	}
 
+#ifdef _WIN32
 	{
 		ULONG_PTR contextToken;
 		if (CoGetContextToken(&contextToken) == CO_E_NOTINITIALIZED) {
@@ -195,6 +197,9 @@ void ArcdpsExtension::IconLoader::QueueIcon::LoadFile(const std::filesystem::pat
 	}
 
 	LoadFrame(pIDecodeFrame, pIWICFactory);
+#else
+	// ToDo: implement this for crossplatform
+#endif
 }
 
 #if ARCDPS_EXTENSION_CURL
@@ -246,6 +251,7 @@ void ArcdpsExtension::IconLoader::QueueIcon::LoadGw2Dat(const std::string& pId) 
 #endif
 
 void ArcdpsExtension::IconLoader::QueueIcon::LoadResource(UINT pId) {
+#ifdef _WIN32
 	HRSRC imageResHandle = FindResource(mIconLoader.mDll, MAKEINTRESOURCE(pId), L"PNG");
 	if (!imageResHandle) {
 		Log("LoadResource|cannot FindResource");
@@ -318,9 +324,13 @@ void ArcdpsExtension::IconLoader::QueueIcon::LoadResource(UINT pId) {
 	}
 
 	LoadFrame(pIDecodeFrame, pIWICFactory);
+#else
+	// ToDo: implement this for crossplatform
+#endif
 }
 
 void ArcdpsExtension::IconLoader::QueueIcon::LoadFrame(const CComPtr<IWICBitmapFrameDecode>& pIDecodeFrame, const CComPtr<IWICImagingFactory>& pIWICFactory) {
+#ifdef _WIN32
 	HRESULT getSizeRes = pIDecodeFrame->GetSize(&mWidth, &mHeight);
 	if (FAILED(getSizeRes)) {
 		Log(std::format("LoadFrame|GetSize failed - {}", getSizeRes));
@@ -420,9 +430,13 @@ void ArcdpsExtension::IconLoader::QueueIcon::LoadFrame(const CComPtr<IWICBitmapF
 	mDxgiFormat = GetFormatDx11(targetFormat);
 
 	mIconLoader.queueLoad(*this);
+#else
+	// ToDo: implement this for crossplatform
+#endif
 }
 
 void ArcdpsExtension::IconLoader::QueueIcon::DeviceLoad() {
+#ifdef _WIN32
 	D3D11_TEXTURE2D_DESC desc;
 	ZeroMemory(&desc, sizeof desc);
 	desc.Width = mWidth;
@@ -470,9 +484,13 @@ void ArcdpsExtension::IconLoader::QueueIcon::DeviceLoad() {
 	}
 
 	mIconLoader.loadDone(*this, d11Texture);
+#else
+	// ToDo: implement this for crossplatform
+#endif
 }
 
 DXGI_FORMAT ArcdpsExtension::IconLoader::QueueIcon::GetFormatDx11(WICPixelFormatGUID pPixelFormat) {
+#ifdef _WIN32
 	if (pPixelFormat == GUID_WICPixelFormat128bppRGBAFloat) {
 		return DXGI_FORMAT_R32G32B32A32_FLOAT;
 	}
@@ -526,4 +544,8 @@ DXGI_FORMAT ArcdpsExtension::IconLoader::QueueIcon::GetFormatDx11(WICPixelFormat
 	}
 
 	throw std::runtime_error("Given DX11 Format is not supported!");
+#else
+	// ToDo: implement this for crossplatform
+	return DXGI_FORMAT_UNKNOWN;
+#endif
 }

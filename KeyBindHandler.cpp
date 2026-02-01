@@ -28,6 +28,7 @@ void ArcdpsExtension::KeyBindHandler::UpdateKeys(const KeyBinds::Key& pOldKey, c
 }
 
 bool ArcdpsExtension::KeyBindHandler::Wnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	#ifdef _WIN32
 	switch (uMsg) {
 		case WM_KEYDOWN:
 		case WM_SYSKEYDOWN: {
@@ -119,6 +120,9 @@ bool ArcdpsExtension::KeyBindHandler::Wnd(HWND hWnd, UINT uMsg, WPARAM wParam, L
 			break;
 		}
 	}
+#else
+	// ToDo: implement this for crossplatform
+#endif
 
 	return false;
 }

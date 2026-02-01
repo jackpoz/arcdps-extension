@@ -42,6 +42,7 @@ bool ArcdpsExtension::UpdateCheckerBase::UpdateState::ChangeStatus(Status pExpec
 }
 
 std::expected<ArcdpsExtension::UpdateCheckerBase::Version, std::string> ArcdpsExtension::UpdateCheckerBase::GetCurrentVersion(LibraryHandle pDll) noexcept {
+#ifdef _WIN32
 	// GetModuleFileName
 	TCHAR moduleFileName[MAX_PATH + 1]{};
 	if (!GetModuleFileName(pDll, moduleFileName, MAX_PATH)) {
@@ -68,6 +69,10 @@ std::expected<ArcdpsExtension::UpdateCheckerBase::Version, std::string> ArcdpsEx
 	}
 
 	return Version({HIWORD(fixedFileInfo->dwProductVersionMS), LOWORD(fixedFileInfo->dwProductVersionMS), HIWORD(fixedFileInfo->dwProductVersionLS), LOWORD(fixedFileInfo->dwProductVersionLS)});
+#else
+	// ToDo: implement this for crossplatform
+	return Version();
+#endif
 }
 
 void ArcdpsExtension::UpdateCheckerBase::ClearFiles(LibraryHandle pDll) noexcept {
@@ -166,6 +171,7 @@ void ArcdpsExtension::UpdateCheckerBase::PerformInstallOrUpdate(UpdateState& pSt
 }
 
 std::optional<std::string> ArcdpsExtension::UpdateCheckerBase::GetPathFromHModule(LibraryHandle pDll) noexcept {
+#ifdef _WIN32
 	CHAR dllPath[MAX_PATH] = {};
 	if (GetModuleFileNameA(pDll, dllPath, _countof(dllPath)) == 0) {
 		Log(std::format("Getting path failed - GetLastError={}", GetLastError()));
@@ -173,6 +179,10 @@ std::optional<std::string> ArcdpsExtension::UpdateCheckerBase::GetPathFromHModul
 	}
 
 	return std::string(dllPath);
+#else
+	// ToDo: implement this for crossplatform
+	return std::nullopt;
+#endif
 }
 
 std::unique_ptr<ArcdpsExtension::UpdateCheckerBase::UpdateState> ArcdpsExtension::UpdateCheckerBase::GetUpdateInternal(
