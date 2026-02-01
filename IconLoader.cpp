@@ -131,7 +131,7 @@ void ArcdpsExtension::IconLoader::queueLoad(const QueueIcon& pIcon) {
 	mLoadQueue.try_emplace(pIcon.mName, pIcon);
 }
 
-void ArcdpsExtension::IconLoader::loadDone(const IconLoader::QueueIcon& pIcon, ID3D11ShaderResourceView* pTexture) {
+void ArcdpsExtension::IconLoader::loadDone(const IconLoader::QueueIcon& pIcon, ShaderResourceView* pTexture) {
 	mIcons.try_emplace(pIcon.mName, pIcon.mWidth, pIcon.mHeight, pTexture);
 }
 
@@ -458,7 +458,7 @@ void ArcdpsExtension::IconLoader::QueueIcon::DeviceLoad() {
 	srvDesc.Texture2D.MipLevels = desc.MipLevels;
 	srvDesc.Texture2D.MostDetailedMip = 0;
 
-	ID3D11ShaderResourceView* d11Texture;
+	ShaderResourceView* d11Texture;
 	mIconLoader.mD11Device->CreateShaderResourceView(pTexture, &srvDesc, &d11Texture);
 	if (FAILED(createTexture2DRes)) {
 		// error copying pixels to buffer

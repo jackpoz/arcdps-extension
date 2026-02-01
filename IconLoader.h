@@ -2,7 +2,7 @@
 
 #include "Singleton.h"
 
-#include <atlbase.h>
+#include <CrossplatformMocks/ATL.h>
 #include <condition_variable>
 #include <CrossplatformMocks/Graphic.h>
 #include <filesystem>
@@ -12,7 +12,7 @@
 #include <thread>
 #include <utility>
 #include <variant>
-#include <wincodec.h>
+#include <CrossplatformMocks/Codec.h>
 #include <CrossplatformMocks/Module.h>
 
 namespace ArcdpsExtension {
@@ -94,15 +94,15 @@ namespace ArcdpsExtension {
 		 * @param pName UID of the Icon (will be casted to `IconLoaderKeyType`)
 		 * @return either the ResourceView* or nullptr if loading failed or is in progress.
 		 */
-		ID3D11ShaderResourceView* Draw(IconLoaderKey auto pName);
+		ShaderResourceView* Draw(IconLoaderKey auto pName);
 
 	private:
 		struct Icon {
 			UINT Width;
 			UINT Height;
-			ID3D11ShaderResourceView* Texture;
+			ShaderResourceView* Texture;
 
-			Icon(UINT pWidth, UINT pHeight, ID3D11ShaderResourceView* pTexture) : Width(pWidth), Height(pHeight), Texture(pTexture) {}
+			Icon(UINT pWidth, UINT pHeight, ShaderResourceView* pTexture) : Width(pWidth), Height(pHeight), Texture(pTexture) {}
 		};
 
 		enum class LoadWay {
@@ -155,7 +155,7 @@ namespace ArcdpsExtension {
 
 		void runner(std::stop_token pToken);
 		void queueLoad(const QueueIcon& pIcon);
-		void loadDone(const IconLoader::QueueIcon& pIcon, ID3D11ShaderResourceView* pTexture);
+		void loadDone(const IconLoader::QueueIcon& pIcon, ShaderResourceView* pTexture);
 	};
 } // namespace ArcdpsExtension
 
@@ -191,7 +191,7 @@ void ArcdpsExtension::IconLoader::RegisterResource(IconLoaderKey auto pName, UIN
 	mThreadVariable.notify_one();
 }
 
-ID3D11ShaderResourceView* ArcdpsExtension::IconLoader::Draw(IconLoaderKey auto pName) {
+ShaderResourceView* ArcdpsExtension::IconLoader::Draw(IconLoaderKey auto pName) {
 	auto name = static_cast<IconLoaderKeyType>(pName);
 	if (const auto& icon = mIcons.find(name); icon != mIcons.end()) {
 		return icon->second.Texture;

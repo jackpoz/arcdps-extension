@@ -10,7 +10,7 @@
       "kind": "git",
       "repository": "https://github.com/jackpoz/Zinn-o-Matics-vcpkg-registry",
       "reference": "fork",
-      "baseline": "a569b69cc605e4d882583457c6db7ccddccd5705",
+      "baseline": "9351108e0710d89aea060d96b254df238c2716ff",
       "packages": [
         "arcdps-unofficial-extras",
         "crossplatformmocks",
