@@ -88,7 +88,7 @@ namespace {
 	};
 } // namespace
 
-ArcdpsExtension::IconLoader::IconLoader(HMODULE pDll, ID3D11Device* pD11Device) {
+ArcdpsExtension::IconLoader::IconLoader(LibraryHandle pDll, GraphicDevice* pD11Device) {
 	mDll = pDll;
 	mD11Device = pD11Device;
 

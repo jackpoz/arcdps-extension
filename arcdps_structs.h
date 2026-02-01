@@ -34,7 +34,6 @@ typedef void (*FreeSignature)(void*);
 typedef arcdps_exports* (*ModInitSignature)();
 typedef uintptr_t (*ModReleaseSignature)();
 
-struct ID3D11Device;
 struct ImGuiContext;
 
 /**
@@ -43,11 +42,11 @@ struct ImGuiContext;
  *
  * To get the Device from the Swapchain:
  * ```C++
- * ID3D11Device* pDevice;
+ * GraphicDevice* pDevice;
  * g_pSwapChain->GetDevice( __uuidof(pDevice), (void**)&pDevice);
  * ```
  */
-typedef ModInitSignature (*GetInitAddrSignature)(const char* arcversion, ImGuiContext* imguictx, void* dxptr, HMODULE arcdll, MallocSignature mallocfn, FreeSignature freefn, UINT dxver);
+typedef ModInitSignature (*GetInitAddrSignature)(const char* arcversion, ImGuiContext* imguictx, void* dxptr, LibraryHandle arcdll, MallocSignature mallocfn, FreeSignature freefn, UINT dxver);
 typedef ModReleaseSignature (*GetReleaseAddrSignature)();
 
 // ARCPDS dll-exports

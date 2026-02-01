@@ -64,13 +64,13 @@ namespace ArcdpsExtension {
 			std::string DownloadUrl;
 		};
 
-		static std::expected<Version, std::string> GetCurrentVersion(HMODULE dll) noexcept;
-		void ClearFiles(HMODULE pDll) noexcept;
-		std::unique_ptr<UpdateState> CheckForUpdate(HMODULE pDll, const Version& pCurrentVersion, std::string&& pRepo, bool pAllowPreRelease) noexcept;
+		static std::expected<Version, std::string> GetCurrentVersion(LibraryHandle dll) noexcept;
+		void ClearFiles(LibraryHandle pDll) noexcept;
+		std::unique_ptr<UpdateState> CheckForUpdate(LibraryHandle pDll, const Version& pCurrentVersion, std::string&& pRepo, bool pAllowPreRelease) noexcept;
 		std::unique_ptr<UpdateState> GetInstallState(std::string&& pInstallPath, std::string&& pRepo, bool pAllowPreRelease) noexcept;
 		void PerformInstallOrUpdate(UpdateState& pState) noexcept; // Requires lock to be held on pState already
 
-		virtual std::optional<std::string> GetPathFromHModule(HMODULE pDll) noexcept;
+		virtual std::optional<std::string> GetPathFromHModule(LibraryHandle pDll) noexcept;
 		std::unique_ptr<UpdateState> GetUpdateInternal(std::string&& pInstallPath, const std::optional<Version>& pCurrentVersion, std::string&& pRepo, bool pAllowPreRelease) noexcept;
 		static std::string GetVersionAsString(const Version& pVersion);
 		virtual bool IsNewer(const Version& pRepoVersion, const Version& pCurrentVersion);

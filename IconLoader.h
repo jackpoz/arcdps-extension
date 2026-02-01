@@ -4,7 +4,7 @@
 
 #include <atlbase.h>
 #include <condition_variable>
-#include <d3d11.h>
+#include <CrossplatformMocks/Graphic.h>
 #include <filesystem>
 #include <map>
 #include <queue>
@@ -29,7 +29,7 @@ namespace ArcdpsExtension {
 	/**
 	 * Load icons in a separate thread.<br>
 	 * Always have an enum or any other list of numbers as unique ID.<br>
-	 * Make sure to call `IconLoader::init(HMODULE, ID3D11Device*)` before you use this class.
+	 * Make sure to call `IconLoader::init(LibraryHandle, GraphicDevice*)` before you use this class.
 	 * If `instance()` is called without `init()`, an exception is thrown.
 	 * <p>
 	 * Class-Internal flow:
@@ -53,12 +53,12 @@ namespace ArcdpsExtension {
 	class IconLoader final : public Singleton<IconLoader> {
 	public:
 		/**
-		 * Call `IconLoader::init(HMODULE, ID3D11Device*)` in `mod_init()`.
+		 * Call `IconLoader::init(LibraryHandle, GraphicDevice*)` in `mod_init()`.
 		 * If this is not called properly, it will crash when icons are loaded.
 		 * @param pDll The DLL of this module (the one to load resources from)
 		 * @param pD11Device The D3D11 device
 		 */
-		IconLoader(HMODULE pDll, ID3D11Device* pD11Device);
+		IconLoader(LibraryHandle pDll, GraphicDevice* pD11Device);
 		~IconLoader() override;
 
 		/**
@@ -141,8 +141,8 @@ namespace ArcdpsExtension {
 			friend IconLoader;
 		};
 
-		HMODULE mDll;
-		ID3D11Device* mD11Device;
+		LibraryHandle mDll;
+		GraphicDevice* mD11Device;
 
 		std::unordered_map<IconLoaderKeyType, Icon> mIcons;
 		std::unordered_map<IconLoaderKeyType, QueueIcon> mLoadQueue;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <d3d11.h>
+#include <CrossplatformMocks/Graphic.h>
 #include <CrossplatformMocks/Module.h>
 
 #if ARCDPS_EXTENSION_IMGUI
@@ -9,9 +9,9 @@
 
 namespace ArcdpsExtension {
 #if ARCDPS_EXTENSION_IMGUI
-	void Setup(HMODULE pDll, ID3D11Device* pD11Device, ImGuiContext* pImGuiContext);
+	void Setup(LibraryHandle pDll, GraphicDevice* pD11Device, ImGuiContext* pImGuiContext);
 #else
-	void Setup(HMODULE pDll, ID3D11Device* pD11Device);
+	void Setup(LibraryHandle pDll, GraphicDevice* pD11Device);
 #endif
 
 	void Shutdown();

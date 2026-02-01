@@ -4,9 +4,9 @@
 #include <gtest/gtest.h>
 
 namespace {
-	ID3D11Device* D11_DEVICE = nullptr;
+	GraphicDevice* D11_DEVICE = nullptr;
 	ID3D11DeviceContext* D11_DEVICE_CONTEXT = nullptr;
-	HMODULE EXE_HANDLE = NULL;
+	LibraryHandle EXE_HANDLE = NULL;
 } // namespace
 
 using namespace ArcdpsExtension;

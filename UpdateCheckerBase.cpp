@@ -41,7 +41,7 @@ bool ArcdpsExtension::UpdateCheckerBase::UpdateState::ChangeStatus(Status pExpec
 	return true;
 }
 
-std::expected<ArcdpsExtension::UpdateCheckerBase::Version, std::string> ArcdpsExtension::UpdateCheckerBase::GetCurrentVersion(HMODULE pDll) noexcept {
+std::expected<ArcdpsExtension::UpdateCheckerBase::Version, std::string> ArcdpsExtension::UpdateCheckerBase::GetCurrentVersion(LibraryHandle pDll) noexcept {
 	// GetModuleFileName
 	TCHAR moduleFileName[MAX_PATH + 1]{};
 	if (!GetModuleFileName(pDll, moduleFileName, MAX_PATH)) {
@@ -70,7 +70,7 @@ std::expected<ArcdpsExtension::UpdateCheckerBase::Version, std::string> ArcdpsEx
 	return Version({HIWORD(fixedFileInfo->dwProductVersionMS), LOWORD(fixedFileInfo->dwProductVersionMS), HIWORD(fixedFileInfo->dwProductVersionLS), LOWORD(fixedFileInfo->dwProductVersionLS)});
 }
 
-void ArcdpsExtension::UpdateCheckerBase::ClearFiles(HMODULE pDll) noexcept {
+void ArcdpsExtension::UpdateCheckerBase::ClearFiles(LibraryHandle pDll) noexcept {
 	std::error_code ec;
 
 	std::optional<std::string> dllPath = GetPathFromHModule(pDll);
@@ -94,7 +94,7 @@ void ArcdpsExtension::UpdateCheckerBase::ClearFiles(HMODULE pDll) noexcept {
 }
 
 std::unique_ptr<ArcdpsExtension::UpdateCheckerBase::UpdateState> ArcdpsExtension::UpdateCheckerBase::CheckForUpdate(
-		HMODULE pDll, const Version& pCurrentVersion, std::string&& pRepo, bool pAllowPreRelease
+		LibraryHandle pDll, const Version& pCurrentVersion, std::string&& pRepo, bool pAllowPreRelease
 ) noexcept {
 	std::optional<std::string> dllPath = GetPathFromHModule(pDll);
 	if (dllPath.has_value() == false) {
@@ -165,7 +165,7 @@ void ArcdpsExtension::UpdateCheckerBase::PerformInstallOrUpdate(UpdateState& pSt
 	}
 }
 
-std::optional<std::string> ArcdpsExtension::UpdateCheckerBase::GetPathFromHModule(HMODULE pDll) noexcept {
+std::optional<std::string> ArcdpsExtension::UpdateCheckerBase::GetPathFromHModule(LibraryHandle pDll) noexcept {
 	CHAR dllPath[MAX_PATH] = {};
 	if (GetModuleFileNameA(pDll, dllPath, _countof(dllPath)) == 0) {
 		Log(std::format("Getting path failed - GetLastError={}", GetLastError()));

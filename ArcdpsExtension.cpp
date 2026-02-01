@@ -16,9 +16,9 @@
 #endif
 
 #if ARCDPS_EXTENSION_IMGUI
-void ArcdpsExtension::Setup(HMODULE pDll, ID3D11Device* pD11Device, ImGuiContext* pImGuiContext) {
+void ArcdpsExtension::Setup(LibraryHandle pDll, GraphicDevice* pD11Device, ImGuiContext* pImGuiContext) {
 #else
-void ArcdpsExtension::Setup(HMODULE pDll, ID3D11Device* pD11Device) {
+void ArcdpsExtension::Setup(LibraryHandle pDll, GraphicDevice* pD11Device) {
 #endif
 	IconLoader::init(pDll, pD11Device);
 	Localization::instance();

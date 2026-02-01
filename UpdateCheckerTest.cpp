@@ -299,7 +299,7 @@ namespace {
 			return result;
 		}
 
-		std::optional<std::string> GetPathFromHModule(HMODULE) noexcept override {
+		std::optional<std::string> GetPathFromHModule(LibraryHandle) noexcept override {
 			return DllName;
 		}
 	};
