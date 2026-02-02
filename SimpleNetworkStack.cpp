@@ -1,5 +1,6 @@
 #include "SimpleNetworkStack.h"
 
+#include <CrossplatformMocks/File.h>
 #include <iostream>
 
 ArcdpsExtension::SimpleNetworkStack::SimpleNetworkStack() {
