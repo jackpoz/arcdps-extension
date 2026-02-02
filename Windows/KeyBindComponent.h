@@ -6,6 +6,7 @@
 #include "../KeyInput.h"
 
 #include <ArcdpsUnofficialExtras/KeyBindStructs.h>
+#include <CrossplatformMocks/Keyboard.h>
 
 namespace ArcdpsExtension {
 	class KeyBindComponent : public ComponentBase {

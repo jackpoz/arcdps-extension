@@ -65,6 +65,7 @@ namespace ImGuiEx {
 				return false;
 			}
 
+#ifdef _WIN32
 			switch (pMessage) {
 				case WM_KEYUP:
 				case WM_SYSKEYUP: {
@@ -151,6 +152,9 @@ namespace ImGuiEx {
 					return true;
 				}
 			}
+#else
+			// ToDo: implement this for crossplatform
+#endif
 		}
 		return false;
 	}

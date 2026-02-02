@@ -5,6 +5,7 @@
 #include "SimpleNetworkStack.h"
 #include "Widgets.h"
 
+#include <CrossplatformMocks/Shell.h>
 #if __has_include(<imgui/imgui.h>)
 #include <imgui/imgui.h>
 #else
