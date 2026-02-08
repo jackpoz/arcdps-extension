@@ -174,7 +174,6 @@ namespace ImGuiEx {
 		ImGui::PopStyleColor();
 	}
 
-#ifdef _WIN32
 	/// <summary>
 	/// KeyInput, has `label` on the left, a textInput in the middle and the used shortcut at the right.
 	/// Only defined for Windows, cause `VkKeyScanA`, `MapVirtualKeyA` and `GetKeyNameTextA` are windows-api functions.
@@ -187,7 +186,6 @@ namespace ImGuiEx {
 	/// <param name="bufSize">the size of the textbuffer</param>
 	/// <param name="keyContainer">int container for the real keyCode</param>
 	void KeyInput(const char* label, const char* id, char* buffer, size_t bufSize, WPARAM& keyContainer, const char* notSetText);
-#endif
 
 	/**
 	 * Component to show an optional setting. This is a checkbox that when checked, will enable the children components.

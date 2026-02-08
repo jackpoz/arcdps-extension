@@ -1191,7 +1191,6 @@ namespace ImGuiEx {
 		return BeginTableEx(str_id, id, columns_count, flags, outer_size, inner_width, child_window_flags);
 	}
 
-#ifdef _WIN32
 	[[deprecated]] // use KeyInput.h instead
 	void
 	KeyInput(const char* label, const char* id, char* buffer, size_t bufSize, WPARAM& keyContainer, const char* notSetText) {
@@ -1199,6 +1198,7 @@ namespace ImGuiEx {
 		ImGui::SameLine();
 		ImGui::PushItemWidth(30);
 		if (ImGui::InputText(id, buffer, bufSize, ImGuiInputTextFlags_CharsUppercase | ImGuiInputTextFlags_CharsNoBlank)) {
+#ifdef _WIN32
 			size_t textLen = strlen(buffer);
 			if (textLen == 0) {
 				keyContainer = 0;
@@ -1216,6 +1216,7 @@ namespace ImGuiEx {
 					keyContainer = 0;
 				}
 			}
+#endif
 		}
 		ImGui::PopItemWidth();
 		ImGui::SameLine();
@@ -1223,15 +1224,16 @@ namespace ImGuiEx {
 		if (keyContainer == 0) {
 			ImGui::TextUnformatted(notSetText);
 		} else {
+#ifdef _WIN32
 			// convert virtual key to vsc key
 			UINT vscKey = MapVirtualKeyA(keyContainer, MAPVK_VK_TO_VSC);
 			// get the name representation of the key
 			char shortCutRealName[32]{};
 			GetKeyNameTextA((vscKey << 16), shortCutRealName, 32);
 			ImGui::TextUnformatted(shortCutRealName);
+#endif
 		}
 	}
-#endif
 } // namespace ImGuiEx
 
 #pragma warning(pop)
