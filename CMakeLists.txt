@@ -131,7 +131,9 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC magic_enum::magic_enum)
 target_link_libraries(${PROJECT_NAME} PUBLIC nlohmann_json::nlohmann_json)
-target_link_libraries(${PROJECT_NAME} PUBLIC Version.lib d3d11.lib)
+if (WIN32)
+	target_link_libraries(${PROJECT_NAME} PUBLIC Version.lib d3d11.lib)
+endif ()
 
 include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME}
