@@ -436,6 +436,12 @@ void ArcdpsExtension::IconLoader::QueueIcon::LoadFrame(const CComPtr<IWICBitmapF
 }
 
 void ArcdpsExtension::IconLoader::QueueIcon::DeviceLoad() {
+	if (mIconLoader.mD11Device == nullptr)
+	{
+		Log(std::format("DeviceLoad|empty mIconLoader.mD11Device"));
+		return;
+	}
+
 #ifdef _WIN32
 	D3D11_TEXTURE2D_DESC desc;
 	ZeroMemory(&desc, sizeof desc);
