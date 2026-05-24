@@ -50,8 +50,6 @@ var NAVTREE =
         [ "googletest", "md_Readme.html#autotoc_md18", null ]
       ] ]
     ] ],
-    [ "Todo List", "todo.html", null ],
-    [ "Topics", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -86,7 +84,7 @@ var NAVTREE =
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
+        [ "Enumerator", "globals_eval.html", "globals_eval" ],
         [ "Macros", "globals_defs.html", "globals_defs" ]
       ] ]
     ] ]
@@ -98,17 +96,16 @@ var NAVTREEINDEX =
 "ArcdpsExtension_8cpp.html",
 "MobIDs_8h.html#aa4183a394aa4e7600297584922235450afcbab72c9778ae00ca2bea7571ac403e",
 "MobIDs_8h.html#aea3234b9e6ff7f848ac3d3f5fb432f63ae105e39f83ffa443a7bc4748d028ae83",
-"arcdps__structs__slim_8h.html#a02aa39376fa6aaf598a43887b429a8dead1b12d076271fa09c70e752288b21d30",
-"classArcdpsExtension_1_1CombatEventHandler.html#a0421b95fd173d6f04aa7fc3a821ae817",
-"classArcdpsExtension_1_1KeyBindComponent.html#a796dd5b1f73da73288fc53868ef41bde",
-"classArcdpsExtension_1_1MainWindow.html#ae765113d2b3ec356d54614357b16a2f1",
-"classEventSequencerTests.html",
-"group__Common.html#gaf6357c263defb60895a32ab418b55894",
-"map_8h.html#a8a7f8db2d5d4c4ed8cea0e270de075f6",
-"namespaceArcdpsExtension.html#a6998431fecc1df50998647659d658933a46fedd93d3fc9853c085edf37a419a65",
-"structArcdpsExtension_1_1MainTableColumn.html#a9244ef25e04b4342653f182f80a1459d",
-"structArcdpsExtension_1_1MainTable_1_1TableColumn.html#a21da4d1bb215ac992574a583ec17fc24",
-"structcbtevent.html#addc74ccf00a31cb991d6e28da3497af1"
+"arcdps__structs__slim_8h.html#a02aa39376fa6aaf598a43887b429a8deaa07c15e8a518246370a81610b52c07a3",
+"arcdps__structs__slim_8h.html#aa9eaab87ee5fe0145dff56595c6e56f6ae2c4de471af1c72f724db266b1545530",
+"classArcdpsExtension_1_1DemoWindow.html#ae53effba264543781532d912dc204bfb",
+"classArcdpsExtension_1_1MainWindow.html#a343c41f626e133baf1e8a5dde1de61fe",
+"classArcdpsExtension_1_1SingletonManager.html",
+"map_8h.html#a2247726e3f5cf2db5a788f21b42e5508",
+"map_8h.html#ab74a09b4773b646e7eff95ef8569d5b2",
+"namespaceImGuiEx.html#aabac93463183f0de50deed46248591ad",
+"structArcdpsExtension_1_1MainTable_1_1Table.html#abc81d7d3913919285b74d8cb99d73b13",
+"structInputTextCallback__UserData.html#a67cca931f5a37b65a5088bce64290f80"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
